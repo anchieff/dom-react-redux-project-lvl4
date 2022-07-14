@@ -14,10 +14,9 @@ import useAuth from "./hooks/index";
 import AuthContext from "./contexts";
 
 const AuthProvider = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const userId = localStorage.getItem("userId");
-
-  // if (userId) setLoggedIn(true);
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem("userId") ? true : false
+  );
 
   const logIn = () => setLoggedIn(true);
   const logOut = () => {

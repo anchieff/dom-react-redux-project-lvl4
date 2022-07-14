@@ -93,6 +93,7 @@ const LoginPage = () => {
                     required
                     id="password"
                     type="password"
+                    isInvalid={loginError}
                     onChange={formik.handleChange}
                     value={formik.values.password}
                   />
