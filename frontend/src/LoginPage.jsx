@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Container, Button, Form, Card, Row, Col } from "react-bootstrap";
+import axios from "axios";
+import routes from "./routes";
+import useAuth from "./hooks";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string().required("Required"),
@@ -11,6 +15,37 @@ const LoginSchema = Yup.object().shape({
 const LoginPage = () => {
   const [loginError, setLoginErorr] = useState(false);
   const userInput = useRef(null);
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirect = () => {
+    const { state } = location;
+    if (state) {
+      const { pathname } = state.from;
+      navigate(pathname, { replace: true });
+    } else {
+      navigate("/", { replace: true });
+    }
+  };
+
+  const sendLoginData = async (data) => {
+    try {
+      const result = await axios.post(routes.loginPath(), data);
+      const { token } = result.data;
+      localStorage.setItem("userId", JSON.stringify({ token }));
+      auth.logIn();
+      redirect();
+    } catch (err) {
+      if (err.isAxiosError && err.response.status === 401) {
+        setLoginErorr(true);
+        userInput.current.select();
+        return;
+      }
+      throw err;
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -18,7 +53,7 @@ const LoginPage = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
-      console.log(values);
+      sendLoginData(values);
     },
   });
 
@@ -62,7 +97,7 @@ const LoginPage = () => {
                     value={formik.values.password}
                   />
                   <Form.Control.Feedback type="invalid">
-                    the username or password is incorrect
+                    Имя пользователя или пароль некорректны
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Button className="w-100 mt-3" type="submit" variant="primary">
