@@ -1,11 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import { Provider } from "react-redux";
+import init from "./init.jsx";
 import "./assets/index.scss";
+import store from "./slices/index.js";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const app = async () => {
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  const vdom = await init();
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>{vdom}</Provider>
+    </React.StrictMode>
+  );
+};
+
+app();

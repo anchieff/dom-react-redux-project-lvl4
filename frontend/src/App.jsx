@@ -10,6 +10,8 @@ import {
 import LoginPage from "./LoginPage";
 import HomePage from "./HomePage";
 import NotFoundPage from "./NotFoundPage";
+import Header from "./components/Header";
+
 import useAuth from "./hooks/index";
 import AuthContext from "./contexts";
 
@@ -46,20 +48,19 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="d-flex flex-column h-100">
-          <Routes>
-            <Route path="login" element={<LoginPage />} />
-            <Route
-              path="/"
-              element={
-                <PrivateRoute>
-                  <HomePage />
-                </PrivateRoute>
-              }
-            />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </div>
+        <Header />
+        <Routes>
+          <Route path="login" element={<LoginPage />} />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <HomePage />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </Router>
     </AuthProvider>
   );
