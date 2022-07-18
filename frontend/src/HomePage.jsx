@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import Channels from "./components/Channels.jsx";
 import Chat from "./components/Chat.jsx";
 import { fetchData } from "./slices/chatSlice.js";
+import { useChat } from "./hooks/useChat.jsx";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const chat = useChat();
 
   useEffect(() => {
     const getData = () => dispatch(fetchData());
@@ -16,7 +18,7 @@ const HomePage = () => {
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
         <Channels />
-        <Chat />
+        <Chat socket={chat} />
       </div>
     </div>
   );

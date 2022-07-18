@@ -17,13 +17,21 @@ export const fetchData = createAsyncThunk("chat/fetchData", async () => {
   return data;
 });
 
+// TODO разбить на отдельные слайсы
 const initialState = {
   channels: [],
+  currentChannelId: null,
+  messages: [],
 };
 
 const chatSlice = createSlice({
   name: "chat",
   initialState,
+  reducers: {
+    addMessage: (state, { payload }) => {
+      state.messages = [...state.messages, payload];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, { payload }) => {
       state.channels = payload.channels;
@@ -33,4 +41,5 @@ const chatSlice = createSlice({
   },
 });
 
+export const { addMessage } = chatSlice.actions;
 export default chatSlice.reducer;

@@ -2,13 +2,25 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-const Chat = () => {
+const Chat = ({ socket }) => {
   const currentChannel = useSelector(
     (state) => state.chat.channels[state.chat.currentChannelId]
   );
   const messages = useSelector((state) => state.chat.messages);
+  const channelId = useSelector((state) => state.chat.currentChannelId);
   const { t } = useTranslation();
   const [text, setText] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      body: text,
+      channelId,
+      username: "admin", // TODO брать значение из стора
+    };
+    socket.sendMessage(data);
+    setText("");
+  };
 
   if (!currentChannel) return null;
 
@@ -25,13 +37,17 @@ const Chat = () => {
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
           {messages.map((message) => (
-            <div class="text-break mb-2">
-              <b>admin</b>: 1
+            <div className="text-break mb-2" key={message.id}>
+              <b>{message.username}</b>: {message.body}
             </div>
           ))}
         </div>
         <div className="mt-auto px-5 py-3">
-          <form noValidate="" className="py-1 border rounded-2">
+          <form
+            noValidate=""
+            className="py-1 border rounded-2"
+            onSubmit={handleSubmit}
+          >
             <div className="input-group has-validation">
               <input
                 name="body"
