@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { selectors as messagesSelector } from "../slices/messagesSlice";
+import { selectors as channelsSelector } from "../slices/channelsSlice.js";
 
-const Chat = ({ socket }) => {
-  const currentChannel = useSelector(
-    (state) => state.chat.channels[state.chat.currentChannelId]
+const Chat = ({ socket, channelId }) => {
+  const allMessages = useSelector(messagesSelector.selectAll);
+  const allChannels = useSelector(channelsSelector.selectAll);
+
+  const messages = allMessages.filter(
+    (message) => message.channelId === channelId
   );
-  const messages = useSelector((state) => state.chat.messages);
-  const channelId = useSelector((state) => state.chat.currentChannelId);
+  const channel = allChannels.find((item) => item.id === channelId);
   const { t } = useTranslation();
   const [text, setText] = useState("");
 
@@ -22,14 +26,14 @@ const Chat = ({ socket }) => {
     setText("");
   };
 
-  if (!currentChannel) return null;
+  if (!channel) return null;
 
   return (
     <div className="col p-0 h-100">
       <div className="d-flex flex-column h-100">
         <div className="bg-light mb-4 p-3 shadow-sm small">
           <p className="m-0">
-            <b># {currentChannel.name}</b>
+            <b># {channel.name}</b>
           </p>
           <span className="text-muted">
             {t("messages.key", { count: [messages.length] })}

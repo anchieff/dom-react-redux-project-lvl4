@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Channels from "./components/Channels.jsx";
 import Chat from "./components/Chat.jsx";
-import { fetchData } from "./slices/chatSlice.js";
+import { fetchData } from "./slices/channelsSlice.js";
 import { useChat } from "./hooks/useChat.jsx";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const chat = useChat();
+  const [currentChannelId, setCurrentChannelId] = useState(1);
 
   useEffect(() => {
     const getData = () => dispatch(fetchData());
@@ -17,8 +18,12 @@ const HomePage = () => {
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
-        <Channels />
-        <Chat socket={chat} />
+        <Channels
+          channelId={currentChannelId}
+          changeChannel={(id) => setCurrentChannelId(id)}
+          socket={chat}
+        />
+        <Chat channelId={currentChannelId} socket={chat} />
       </div>
     </div>
   );

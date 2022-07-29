@@ -13,6 +13,13 @@ export default {
       header: "Каналы",
       remove: "Удалить",
       rename: "Переименовать",
+      addHeader: "Добавить канал",
+      addPlaceholder: "Название канала",
+      addButton: "Добавить",
+      renameHeader: "Переименовать канал",
+      renameButton: "Сохранить",
+      removeHeader: "Удалить канал",
+      removeButton: "Удалить",
     },
     messages: {
       key_one: "{{count}} сообщение",
@@ -23,5 +30,6 @@ export default {
       placeholder: "Введите сообщение...",
       send: "Отправить",
     },
+    cancelButton: "Отменить",
   },
 };
