@@ -7,9 +7,9 @@ import {
 import routes from "../routes.js";
 
 const getAuthHeader = () => {
-  const userId = JSON.parse(localStorage.getItem("userId"));
-  if (userId && userId.token) {
-    return { Authorization: `Bearer ${userId.token}` };
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user && user.token) {
+    return { Authorization: `Bearer ${user.token}` };
   }
   return {};
 };
