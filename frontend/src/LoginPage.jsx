@@ -7,6 +7,8 @@ import axios from "axios";
 import routes from "./routes";
 import useAuth from "./hooks";
 import { useTranslation } from "react-i18next";
+import { BrowserRouter as Link } from "react-router-dom";
+import _ from "lodash";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string().required("Required"),
@@ -33,9 +35,13 @@ const LoginPage = () => {
 
   const sendLoginData = async (data) => {
     try {
+      const { username } = data;
       const result = await axios.post(routes.loginPath(), data);
       const { token } = result.data;
-      localStorage.setItem("userId", JSON.stringify({ token }));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ username, token, id: _.uniqueId() })
+      );
       auth.logIn();
       redirect();
     } catch (err) {
@@ -111,6 +117,10 @@ const LoginPage = () => {
               </Button>
             </Form>
           </Card.Body>
+          <Card.Footer>
+            {t("signin.signin_text")}
+            <Link to="/signin">{t("signin.signin_link")}</Link>
+          </Card.Footer>
         </Card>
       </Col>
     </Row>

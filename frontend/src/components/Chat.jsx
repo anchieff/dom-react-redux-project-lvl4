@@ -7,6 +7,7 @@ import { selectors as channelsSelector } from "../slices/channelsSlice.js";
 const Chat = ({ socket, channelId }) => {
   const allMessages = useSelector(messagesSelector.selectAll);
   const allChannels = useSelector(channelsSelector.selectAll);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const messages = allMessages.filter(
     (message) => message.channelId === channelId
@@ -20,7 +21,7 @@ const Chat = ({ socket, channelId }) => {
     const data = {
       body: text,
       channelId,
-      username: "admin", // TODO брать значение из стора
+      username: user.username,
     };
     socket.sendMessage(data);
     setText("");

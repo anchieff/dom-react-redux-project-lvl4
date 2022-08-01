@@ -9,6 +9,7 @@ import {
 
 import LoginPage from "./LoginPage";
 import HomePage from "./HomePage";
+import SigninPage from "./SigninPage";
 import NotFoundPage from "./NotFoundPage";
 import Header from "./components/Header";
 
@@ -17,12 +18,12 @@ import AuthContext from "./contexts";
 
 const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(
-    localStorage.getItem("userId") ? true : false
+    localStorage.getItem("user") ? true : false
   );
 
   const logIn = () => setLoggedIn(true);
   const logOut = () => {
-    localStorage.removeItem("userId");
+    localStorage.removeItem("user");
     setLoggedIn(false);
   };
 
@@ -59,6 +60,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/signin" element={<SigninPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>

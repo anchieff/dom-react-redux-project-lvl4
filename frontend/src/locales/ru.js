@@ -1,6 +1,6 @@
 export default {
   translation: {
-    brand: "DevChat",
+    brand: "Hexlet Chat",
     login: {
       header: "Войти",
       username: "Ваш ник",
@@ -8,7 +8,23 @@ export default {
       submit: "Войти",
       error: "Имя пользователя или пароль некорректны",
     },
+    hello: "Привет, ",
     logout: "Выйти",
+    signin: {
+      signin_text: "Нет аккаунта? ",
+      signin_link: "Регистрация",
+      header: "Регистрация",
+      username: "Имя пользователя",
+      password: "Пароль",
+      confirm_password: "Повторите пароль",
+      submit: "Зарегистрироваться",
+      required_error: "Обязательное поле",
+      min_3: "Минимум 3 символа",
+      min_6: "Минимум 6 символов",
+      max_20: "Максимум 20 символов",
+      not_matches: "Пароли не совпадают",
+      user_exist: "Пользователь с таким логином уже существует",
+    },
     channels: {
       header: "Каналы",
       remove: "Удалить",
