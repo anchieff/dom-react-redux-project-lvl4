@@ -7,7 +7,7 @@ import axios from "axios";
 import routes from "./routes";
 import useAuth from "./hooks";
 import { useTranslation } from "react-i18next";
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import _ from "lodash";
 
 const LoginSchema = Yup.object().shape({
