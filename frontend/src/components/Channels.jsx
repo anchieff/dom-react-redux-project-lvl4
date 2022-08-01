@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -18,9 +20,28 @@ const Channels = ({ socket, changeChannel, channelId }) => {
   const Remove = getModal("removing");
   const Rename = getModal("renaming");
 
-  const addChannel = (channel) => socket.createChannel(channel);
-  const deleteChannel = () => socket.deleteChannel(removedId);
-  const renameChannel = (channel) => socket.renameChannel(channel);
+  const notify = (text, status) => {
+    toast[status](text, {
+      position: toast.POSITION.TOP_RIGHT,
+      theme: "colored",
+    });
+  };
+
+  const addChannel = (channel) => {
+    socket.createChannel(channel);
+    if (!socket.error) notify(t("channels.addSuccess"), "success");
+    else notify(t("error"), "error");
+  };
+  const deleteChannel = () => {
+    socket.deleteChannel(removedId);
+    if (!socket.error) notify(t("channels.removeSuccess"), "success");
+    else notify(t("error"), "error");
+  };
+  const renameChannel = (channel) => {
+    socket.renameChannel(channel);
+    if (!socket.error) notify(t("channels.renameSuccess"), "success");
+    else notify(t("error"), "error");
+  };
 
   const renderAddModal = () => {
     if (modal !== "adding") return null;
@@ -123,6 +144,7 @@ const Channels = ({ socket, changeChannel, channelId }) => {
 
   return (
     <>
+      <ToastContainer autoClose={8000} />
       <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
         <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
           <span>{t("channels.header")}</span>
@@ -137,6 +159,7 @@ const Channels = ({ socket, changeChannel, channelId }) => {
         </div>
         {renderChannels()}
       </div>
+
       {renderAddModal()}
       {renderRenameModal()}
       {renderRemoveModal()}

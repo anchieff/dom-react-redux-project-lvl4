@@ -3,11 +3,20 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { selectors as messagesSelector } from "../slices/messagesSlice";
 import { selectors as channelsSelector } from "../slices/channelsSlice.js";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Chat = ({ socket, channelId }) => {
   const allMessages = useSelector(messagesSelector.selectAll);
   const allChannels = useSelector(channelsSelector.selectAll);
   const user = JSON.parse(localStorage.getItem("user"));
+
+  const notify = (text, status) => {
+    toast[status](text, {
+      position: toast.POSITION.TOP_RIGHT,
+      theme: "colored",
+    });
+  };
 
   const messages = allMessages.filter(
     (message) => message.channelId === channelId
@@ -24,6 +33,7 @@ const Chat = ({ socket, channelId }) => {
       username: user.username,
     };
     socket.sendMessage(data);
+    if (socket.error) notify(t("error"), "error");
     setText("");
   };
 
@@ -31,6 +41,7 @@ const Chat = ({ socket, channelId }) => {
 
   return (
     <div className="col p-0 h-100">
+      <ToastContainer autoClose={8000} />
       <div className="d-flex flex-column h-100">
         <div className="bg-light mb-4 p-3 shadow-sm small">
           <p className="m-0">

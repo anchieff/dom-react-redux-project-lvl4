@@ -46,7 +46,6 @@ export const useChat = () => {
   const sendMessage = (data) =>
     socketRef.current.emit("newMessage", data, (response) => {
       if (response.status !== "ok") {
-        console.log("This case");
         setErrors(true);
       }
     });
@@ -54,7 +53,6 @@ export const useChat = () => {
   const createChannel = (data) => {
     socketRef.current.emit("newChannel", data, (response) => {
       if (response.status !== "ok") {
-        console.log("This case");
         setErrors(true);
       }
     });
@@ -63,7 +61,6 @@ export const useChat = () => {
   const renameChannel = (data) => {
     socketRef.current.emit("renameChannel", data, (response) => {
       if (response.status !== "ok") {
-        console.log("This case");
         setErrors(true);
       }
     });
@@ -72,7 +69,6 @@ export const useChat = () => {
   const deleteChannel = (data) => {
     socketRef.current.emit("removeChannel", { id: data }, (response) => {
       if (response.status !== "ok") {
-        console.log("This case");
         setErrors(true);
       }
     });

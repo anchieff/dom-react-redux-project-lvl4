@@ -36,6 +36,9 @@ export default {
       renameButton: "Сохранить",
       removeHeader: "Удалить канал",
       removeButton: "Удалить",
+      addSuccess: "Канал успешно добавлен",
+      renameSuccess: "Канал успешно переименован",
+      removeSuccess: "Канал успешно удален",
     },
     messages: {
       key_one: "{{count}} сообщение",
@@ -47,5 +50,6 @@ export default {
       send: "Отправить",
     },
     cancelButton: "Отменить",
+    error: "Что-то пошло не так, попробуйте повторить позднее",
   },
 };

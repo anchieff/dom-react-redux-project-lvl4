@@ -13,7 +13,7 @@ const Header = () => {
         <a className="navbar-brand" href="/">
           {t("brand")}
         </a>
-        {user && (
+        {Boolean(user) && (
           <div className="d-flex align-items-center">
             <div className="m-2">
               {t("hello")}
