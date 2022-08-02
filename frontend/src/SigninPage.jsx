@@ -83,7 +83,7 @@ const SigninPage = () => {
       <Col xxl={6} lg={6}>
         <Card className="shadow-sm p-3">
           <Card.Body>
-            <Card.Title>{t("signin.header")}</Card.Title>
+            <h1 className="card-title">{t("signin.header")}</h1>
             <Form onSubmit={formik.handleSubmit}>
               <Form.Group className="mt-3">
                 <FloatingLabel
