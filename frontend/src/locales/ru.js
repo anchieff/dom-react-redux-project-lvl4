@@ -16,7 +16,7 @@ export default {
       header: "Регистрация",
       username: "Имя пользователя",
       password: "Пароль",
-      confirm_password: "Повторите пароль",
+      confirm_password: "Подтвердите пароль",
       submit: "Зарегистрироваться",
       required_error: "Обязательное поле",
       min_3: "Минимум 3 символа",

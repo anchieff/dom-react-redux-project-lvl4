@@ -86,9 +86,6 @@ const SigninPage = () => {
             <Card.Title>{t("signin.header")}</Card.Title>
             <Form onSubmit={formik.handleSubmit}>
               <Form.Group className="mt-3">
-                <Form.Label htmlFor="username">
-                  {t("signin.username")}
-                </Form.Label>
                 <Form.Control
                   placeholder={t("signin.username")}
                   name="username"
@@ -114,9 +111,6 @@ const SigninPage = () => {
                 )}
               </Form.Group>
               <Form.Group className="mt-3">
-                <Form.Label htmlFor="password">
-                  {t("signin.password")}
-                </Form.Label>
                 <Form.Control
                   placeholder={t("signin.password")}
                   name="password"
@@ -134,9 +128,6 @@ const SigninPage = () => {
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mt-3">
-                <Form.Label htmlFor="confirm_password">
-                  {t("signin.confirm_password")}
-                </Form.Label>
                 <Form.Control
                   placeholder={t("signin.confirm_password")}
                   name="confirm_password"
