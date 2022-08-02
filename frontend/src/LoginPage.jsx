@@ -119,7 +119,7 @@ const LoginPage = () => {
           </Card.Body>
           <Card.Footer>
             {t("signin.signin_text")}
-            <Link to="/signin">{t("signin.signin_link")}</Link>
+            <Link to="/signup">{t("signin.signin_link")}</Link>
           </Card.Footer>
         </Card>
       </Col>

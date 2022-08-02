@@ -60,7 +60,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/signin" element={<SigninPage />} />
+          <Route path="/signup" element={<SigninPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
