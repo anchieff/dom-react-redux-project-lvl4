@@ -9,7 +9,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { selectors } from "../slices/channelsSlice.js";
 import getModal from "./modals/index";
 
-const Channels = ({ socket, changeChannel, channelId }) => {
+const Channels = ({ socket, changeChannel, channelId, filter }) => {
   const channels = useSelector(selectors.selectAll);
   const { t } = useTranslation();
 
@@ -19,6 +19,10 @@ const Channels = ({ socket, changeChannel, channelId }) => {
   const Add = getModal("adding");
   const Remove = getModal("removing");
   const Rename = getModal("renaming");
+
+  // TODO задваиваются уведомления
+  // TODO едет верстка, если удалить активный канал
+  // TODO добавить ошибку при получении данных
 
   const notify = (text, status) => {
     toast[status](text, {
@@ -50,6 +54,7 @@ const Channels = ({ socket, changeChannel, channelId }) => {
         show={modal === "adding"}
         handleClose={() => setModal(null)}
         addChannel={addChannel}
+        filter={filter}
       />
     );
   };
@@ -62,6 +67,7 @@ const Channels = ({ socket, changeChannel, channelId }) => {
         handleClose={() => setModal(null)}
         channelId={removedId}
         renameChannel={renameChannel}
+        filter={filter}
       />
     );
   };

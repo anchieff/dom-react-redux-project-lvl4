@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { Modal, FormGroup, FormControl, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-const Add = ({ show, handleClose, addChannel }) => {
+const Add = ({ show, handleClose, addChannel, filter }) => {
   const channelInput = useRef(null);
   const { t } = useTranslation();
 
@@ -15,8 +15,12 @@ const Add = ({ show, handleClose, addChannel }) => {
       id: _.uniqueId(),
       name: "",
     },
-    onSubmit: (values) => {
-      addChannel(values);
+    onSubmit: ({ id, name }) => {
+      const data = {
+        id,
+        name: filter.clean(name),
+      };
+      addChannel(data);
       handleClose();
     },
   });

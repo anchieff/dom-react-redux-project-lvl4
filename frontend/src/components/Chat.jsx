@@ -6,7 +6,7 @@ import { selectors as channelsSelector } from "../slices/channelsSlice.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Chat = ({ socket, channelId }) => {
+const Chat = ({ socket, channelId, filter }) => {
   const allMessages = useSelector(messagesSelector.selectAll);
   const allChannels = useSelector(channelsSelector.selectAll);
   const user = JSON.parse(localStorage.getItem("user"));
@@ -28,7 +28,7 @@ const Chat = ({ socket, channelId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      body: text,
+      body: filter.clean(text),
       channelId,
       username: user.username,
     };

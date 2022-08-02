@@ -5,7 +5,7 @@ import { Modal, FormGroup, FormControl, Button } from "react-bootstrap";
 import { selectors as channelsSelector } from "../../slices/channelsSlice";
 import { useTranslation } from "react-i18next";
 
-const Rename = ({ show, handleClose, renameChannel, channelId }) => {
+const Rename = ({ show, handleClose, renameChannel, channelId, filter }) => {
   const channelInput = useRef(null);
   const { t } = useTranslation();
   const allChannels = useSelector(channelsSelector.selectAll);
@@ -18,9 +18,8 @@ const Rename = ({ show, handleClose, renameChannel, channelId }) => {
       id: channelId,
       name: channel.name,
     },
-    onSubmit: (values) => {
-      console.log("from modal", values);
-      renameChannel(values);
+    onSubmit: ({ id, name }) => {
+      renameChannel({ id, name: filter.clean(name) });
       handleClose();
     },
   });

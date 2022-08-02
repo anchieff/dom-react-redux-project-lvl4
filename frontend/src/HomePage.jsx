@@ -4,12 +4,14 @@ import Channels from "./components/Channels.jsx";
 import Chat from "./components/Chat.jsx";
 import { fetchData } from "./slices/channelsSlice.js";
 import { useChat } from "./hooks/useChat.jsx";
+import filter from "leo-profanity";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const chat = useChat();
   const [currentChannelId, setCurrentChannelId] = useState(1);
 
+  useEffect(() => filter.loadDictionary("ru"), []);
   useEffect(() => {
     const getData = () => dispatch(fetchData());
     getData();
@@ -22,8 +24,9 @@ const HomePage = () => {
           channelId={currentChannelId}
           changeChannel={(id) => setCurrentChannelId(id)}
           socket={chat}
+          filter={filter}
         />
-        <Chat channelId={currentChannelId} socket={chat} />
+        <Chat channelId={currentChannelId} socket={chat} filter={filter} />
       </div>
     </div>
   );
