@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
@@ -20,7 +20,6 @@ const Channels = ({ socket, changeChannel, channelId, filter }) => {
   const Remove = getModal("removing");
   const Rename = getModal("renaming");
 
-  // TODO задваиваются уведомления
   // TODO едет верстка, если удалить активный канал
   // TODO добавить ошибку при получении данных
 
@@ -149,7 +148,6 @@ const Channels = ({ socket, changeChannel, channelId, filter }) => {
 
   return (
     <>
-      <ToastContainer autoClose={8000} />
       <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
         <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
           <span>{t("channels.header")}</span>

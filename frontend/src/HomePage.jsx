@@ -5,6 +5,7 @@ import Chat from "./components/Chat.jsx";
 import { fetchData } from "./slices/channelsSlice.js";
 import { useChat } from "./hooks/useChat.jsx";
 import filter from "leo-profanity";
+import { ToastContainer } from "react-toastify";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -18,17 +19,20 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="container h-100 my-4 overflow-hidden rounded shadow">
-      <div className="row h-100 bg-white flex-md-row">
-        <Channels
-          channelId={currentChannelId}
-          changeChannel={(id) => setCurrentChannelId(id)}
-          socket={chat}
-          filter={filter}
-        />
-        <Chat channelId={currentChannelId} socket={chat} filter={filter} />
+    <>
+      <div className="container h-100 my-4 overflow-hidden rounded shadow">
+        <div className="row h-100 bg-white flex-md-row">
+          <Channels
+            channelId={currentChannelId}
+            changeChannel={(id) => setCurrentChannelId(id)}
+            socket={chat}
+            filter={filter}
+          />
+          <Chat channelId={currentChannelId} socket={chat} filter={filter} />
+        </div>
       </div>
-    </div>
+      <ToastContainer autoClose={5000} />
+    </>
   );
 };
 
