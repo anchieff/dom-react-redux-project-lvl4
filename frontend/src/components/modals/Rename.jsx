@@ -1,7 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
-import { Modal, FormGroup, FormControl, Button } from "react-bootstrap";
+import {
+  Modal,
+  FormGroup,
+  FormControl,
+  Button,
+  FloatingLabel,
+} from "react-bootstrap";
 import { selectors as channelsSelector } from "../../slices/channelsSlice";
 import { useTranslation } from "react-i18next";
 
@@ -32,13 +38,18 @@ const Rename = ({ show, handleClose, renameChannel, channelId, filter }) => {
       <Modal.Body>
         <form onSubmit={formik.handleSubmit}>
           <FormGroup>
-            <FormControl
-              name="name"
-              required=""
-              onChange={formik.handleChange}
-              value={formik.values.name}
-              ref={channelInput}
-            />
+            <FloatingLabel
+              label={t("channels.addPlaceholder")}
+              controlId="name"
+            >
+              <FormControl
+                name="name"
+                required=""
+                onChange={formik.handleChange}
+                value={formik.values.name}
+                ref={channelInput}
+              />
+            </FloatingLabel>
           </FormGroup>
           <div className="mt-3">
             <Button variant="secondary" onClick={handleClose}>
