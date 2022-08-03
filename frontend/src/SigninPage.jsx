@@ -20,8 +20,8 @@ const SigninPage = () => {
   const SigninSchema = Yup.object().shape({
     username: Yup.string()
       .required(t("signin.required_error"))
-      .min(3, t("signin.min_3"))
-      .max(20, t("signin.max_20")),
+      .min(3, t("signin.min_3_max_20"))
+      .max(20, t("signin.min_3_max_20")),
     password: Yup.string()
       .required(t("signin.required_error"))
       .min(6, t("signin.min_6")),
