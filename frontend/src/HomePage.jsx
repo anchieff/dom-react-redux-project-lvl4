@@ -11,7 +11,7 @@ const HomePage = () => {
   const chat = useChat();
   const [currentChannelId, setCurrentChannelId] = useState(1);
 
-  useEffect(() => filter.loadDictionary("ru"), []);
+  useEffect(() => filter.loadDictionary("en"), []);
   useEffect(() => {
     const getData = () => dispatch(fetchData());
     getData();
