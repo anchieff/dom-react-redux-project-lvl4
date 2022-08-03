@@ -108,8 +108,7 @@ const Channels = ({ socket, changeChannel, channelId, filter }) => {
                     className="w-100 rounded-0 text-start btn"
                     onClick={() => changeChannel(channel.id)}
                   >
-                    <span className="me-1">#</span>
-                    {channel.name}
+                    <span className="me-1"># {channel.name}</span>
                   </Button>
 
                   <Dropdown.Toggle
