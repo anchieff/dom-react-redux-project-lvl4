@@ -114,7 +114,11 @@ const Channels = ({ socket, changeChannel, channelId, filter }) => {
                     split
                     variant={channel.id === channelId ? "secondary" : "light"}
                     id="dropdown-split-basic"
-                  />
+                  >
+                    <span className="visually-hidden">
+                      {t("channels.control_channel")}
+                    </span>
+                  </Dropdown.Toggle>
 
                   <Dropdown.Menu>
                     <Dropdown.Item onClick={() => showRemoveModal(channel.id)}>

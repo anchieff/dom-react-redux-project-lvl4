@@ -31,6 +31,7 @@ export default {
       addHeader: "Добавить канал",
       addPlaceholder: "Имя канала",
       addButton: "Добавить",
+      control_channel: "Управление каналом",
       renameHeader: "Переименовать канал",
       renameButton: "Сохранить",
       removeHeader: "Удалить канал",
