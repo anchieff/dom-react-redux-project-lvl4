@@ -38,7 +38,7 @@ export default {
       removeButton: "Удалить",
       addSuccess: "Канал создан",
       renameSuccess: "Канал переименован",
-      removeSuccess: "Канал удален",
+      removeSuccess: "Канал удалён",
     },
     messages: {
       key_one: "{{count}} сообщение",
