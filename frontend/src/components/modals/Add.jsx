@@ -1,7 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import _ from "lodash";
 import { useFormik } from "formik";
-import { Modal, FormGroup, FormControl, Button } from "react-bootstrap";
+import {
+  Modal,
+  FormGroup,
+  FormControl,
+  Button,
+  FloatingLabel,
+} from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
 const Add = ({ show, handleClose, addChannel, filter }) => {
@@ -33,15 +39,20 @@ const Add = ({ show, handleClose, addChannel, filter }) => {
       <Modal.Body>
         <form onSubmit={formik.handleSubmit}>
           <FormGroup>
-            <FormControl
-              type="text"
-              placeholder={t("channels.addPlaceholder")}
-              required=""
-              name="name"
-              onChange={formik.handleChange}
-              value={formik.values.name}
-              ref={channelInput}
-            />
+            <FloatingLabel
+              label={t("channels.addPlaceholder")}
+              controlId="name"
+            >
+              <FormControl
+                type="text"
+                placeholder={t("channels.addPlaceholder")}
+                required=""
+                name="name"
+                onChange={formik.handleChange}
+                value={formik.values.name}
+                ref={channelInput}
+              />
+            </FloatingLabel>
           </FormGroup>
           <div className="mt-3">
             <Button variant="secondary" onClick={handleClose}>
