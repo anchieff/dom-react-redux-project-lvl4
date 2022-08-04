@@ -111,6 +111,7 @@ function Channels({
                   >
                     <span className="me-1">
                       #
+                      {' '}
                       {channel.name}
                     </span>
                   </Button>
