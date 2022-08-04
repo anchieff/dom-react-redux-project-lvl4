@@ -15,10 +15,13 @@ const messagesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, { payload }) => {
       const { messages } = payload;
+      // eslint-disable-line no-param-reassign
       state.entities = {};
       messages.forEach((item) => {
+        // eslint-disable-line no-param-reassign
         state.entities[item.id] = item;
       });
+      // eslint-disable-line no-param-reassign
       state.ids = Object.keys(state.entities);
     });
   },
