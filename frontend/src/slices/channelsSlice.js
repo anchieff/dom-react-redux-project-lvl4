@@ -37,14 +37,7 @@ const channelsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, { payload }) => {
       const { channels } = payload;
-      // eslint-disable-line no-param-reassign
-      state.entities = {};
-      channels.forEach((item) => {
-        // eslint-disable-line no-param-reassign
-        state.entities[item.id] = item;
-      });
-      // eslint-disable-line no-param-reassign
-      state.ids = Object.keys(state.entities);
+      channelsAdapter.addMany(state, channels);
     });
   },
 });
