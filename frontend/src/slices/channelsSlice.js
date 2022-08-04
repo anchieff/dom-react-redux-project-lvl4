@@ -1,20 +1,20 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   createAsyncThunk,
   createSlice,
   createEntityAdapter,
-} from "@reduxjs/toolkit";
-import routes from "../routes.js";
+} from '@reduxjs/toolkit';
+import routes from '../routes.js';
 
 const getAuthHeader = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem('user'));
   if (Boolean(user) && user.token) {
     return { Authorization: `Bearer ${user.token}` };
   }
   return {};
 };
 
-export const fetchData = createAsyncThunk("channels/fetchData", async () => {
+export const fetchData = createAsyncThunk('channels/fetchData', async () => {
   const { data } = await axios.get(routes.getDataPath(), {
     headers: getAuthHeader(),
   });
@@ -26,7 +26,7 @@ const channelsAdapter = createEntityAdapter();
 const initialState = channelsAdapter.getInitialState();
 
 const channelsSlice = createSlice({
-  name: "channels",
+  name: 'channels',
   initialState,
   reducers: {
     setChannels: channelsAdapter.addMany,
@@ -47,7 +47,7 @@ const channelsSlice = createSlice({
 });
 
 export const selectors = channelsAdapter.getSelectors(
-  (state) => state.channels
+  (state) => state.channels,
 );
 export const { actions } = channelsSlice;
 export default channelsSlice.reducer;

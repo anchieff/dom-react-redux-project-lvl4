@@ -1,8 +1,8 @@
-import React from "react";
-import { Modal, Button, FormGroup } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
+import React from 'react';
+import { Modal, Button, FormGroup } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
-const Remove = ({ show, handleClose, removeChannel }) => {
+function Remove({ show, handleClose, removeChannel }) {
   const { t } = useTranslation();
 
   const handleRemove = () => {
@@ -13,22 +13,23 @@ const Remove = ({ show, handleClose, removeChannel }) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{t("channels.removeHeader")}</Modal.Title>
+        <Modal.Title>{t('channels.removeHeader')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form onSubmit={handleRemove}>
           <FormGroup>
             <Button variant="secondary" onClick={handleClose}>
-              {t("cancelButton")}
-            </Button>{" "}
+              {t('cancelButton')}
+            </Button>
+            {' '}
             <Button onClick={handleRemove} variant="danger">
-              {t("channels.removeButton")}
+              {t('channels.removeButton')}
             </Button>
           </FormGroup>
         </form>
       </Modal.Body>
     </Modal>
   );
-};
+}
 
 export default Remove;

@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import Channels from "./components/Channels.jsx";
-import Chat from "./components/Chat.jsx";
-import { fetchData } from "./slices/channelsSlice.js";
-import { useChat } from "./hooks/useChat.jsx";
-import filter from "leo-profanity";
-import { ToastContainer } from "react-toastify";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import filter from 'leo-profanity';
+import { ToastContainer } from 'react-toastify';
+import Channels from './components/Channels.jsx';
+import Chat from './components/Chat.jsx';
+import { fetchData } from './slices/channelsSlice.js';
+import { useChat } from './hooks/useChat.jsx';
 
-const HomePage = () => {
+function HomePage() {
   const dispatch = useDispatch();
   const chat = useChat();
   const [currentChannelId, setCurrentChannelId] = useState(1);
 
-  useEffect(() => filter.loadDictionary("en"), []);
+  useEffect(() => filter.loadDictionary('en'), []);
   useEffect(() => {
     const getData = () => dispatch(fetchData());
     getData();
@@ -34,6 +34,6 @@ const HomePage = () => {
       <ToastContainer autoClose={5000} />
     </>
   );
-};
+}
 
 export default HomePage;

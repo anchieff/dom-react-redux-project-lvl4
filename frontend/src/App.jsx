@@ -1,29 +1,29 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
   Navigate,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import LoginPage from "./LoginPage";
-import HomePage from "./HomePage";
-import SigninPage from "./SigninPage";
-import NotFoundPage from "./NotFoundPage";
-import Header from "./components/Header";
+import LoginPage from './LoginPage';
+import HomePage from './HomePage';
+import SigninPage from './SigninPage';
+import NotFoundPage from './NotFoundPage';
+import Header from './components/Header';
 
-import useAuth from "./hooks/index";
-import AuthContext from "./contexts";
+import useAuth from './hooks/index';
+import AuthContext from './contexts';
 
-const AuthProvider = ({ children }) => {
+function AuthProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(
-    localStorage.getItem("user") ? true : false
+    !!localStorage.getItem('user'),
   );
 
   const logIn = () => setLoggedIn(true);
   const logOut = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem('user');
     setLoggedIn(false);
   };
 
@@ -32,9 +32,9 @@ const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-const PrivateRoute = ({ children }) => {
+function PrivateRoute({ children }) {
   const auth = useAuth();
   const location = useLocation();
 
@@ -43,7 +43,7 @@ const PrivateRoute = ({ children }) => {
   ) : (
     <Navigate to="/login" state={{ from: location }} />
   );
-};
+}
 
 function App() {
   return (
@@ -54,11 +54,11 @@ function App() {
           <Route path="login" element={<LoginPage />} />
           <Route
             path="/"
-            element={
+            element={(
               <PrivateRoute>
                 <HomePage />
               </PrivateRoute>
-            }
+            )}
           />
           <Route path="/signup" element={<SigninPage />} />
           <Route path="*" element={<NotFoundPage />} />

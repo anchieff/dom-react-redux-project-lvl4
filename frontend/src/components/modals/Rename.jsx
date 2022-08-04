@@ -1,17 +1,19 @@
-import React, { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { useFormik } from "formik";
+import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { useFormik } from 'formik';
 import {
   Modal,
   FormGroup,
   FormControl,
   Button,
   FloatingLabel,
-} from "react-bootstrap";
-import { selectors as channelsSelector } from "../../slices/channelsSlice";
-import { useTranslation } from "react-i18next";
+} from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { selectors as channelsSelector } from '../../slices/channelsSlice';
 
-const Rename = ({ show, handleClose, renameChannel, channelId, filter }) => {
+function Rename({
+  show, handleClose, renameChannel, channelId, filter,
+}) {
   const channelInput = useRef(null);
   const { t } = useTranslation();
   const allChannels = useSelector(channelsSelector.selectAll);
@@ -33,13 +35,13 @@ const Rename = ({ show, handleClose, renameChannel, channelId, filter }) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{t("channels.renameHeader")}</Modal.Title>
+        <Modal.Title>{t('channels.renameHeader')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form onSubmit={formik.handleSubmit}>
           <FormGroup>
             <FloatingLabel
-              label={t("channels.addPlaceholder")}
+              label={t('channels.addPlaceholder')}
               controlId="name"
             >
               <FormControl
@@ -53,14 +55,15 @@ const Rename = ({ show, handleClose, renameChannel, channelId, filter }) => {
           </FormGroup>
           <div className="mt-3">
             <Button variant="secondary" onClick={handleClose}>
-              {t("cancelButton")}
-            </Button>{" "}
-            <Button type="submit">{t("channels.renameButton")}</Button>
+              {t('cancelButton')}
+            </Button>
+            {' '}
+            <Button type="submit">{t('channels.renameButton')}</Button>
           </div>
         </form>
       </Modal.Body>
     </Modal>
   );
-};
+}
 
 export default Rename;
