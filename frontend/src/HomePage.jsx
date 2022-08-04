@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import Channels from './components/Channels.jsx';
 import Chat from './components/Chat.jsx';
 import { fetchData } from './slices/channelsSlice.js';
-import { useChat } from './hooks/useChat.jsx';
+import useChat from './hooks/useChat.jsx';
 
 function HomePage() {
   const dispatch = useDispatch();
